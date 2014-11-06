@@ -1,154 +1,21 @@
 <!doctype html>
 <html>
   <head>
-    <title>Werewolf for CS1331 TA's Only!</title>
+    <title>CS1331 Office Hours</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
   </head>
   <body>
     <div id="wrapper">
-    <div id="join">
-      <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-      </form>
-    </div>
-    <div id="players">Players:<ul id="users"></ul></div>
-    <div id="rolesInGame">Roles:<ul id="roles"></ul></div>
-    <div id="myRole"></div>
-    <div id="vote">
-      <span id="header">Vote for Roles</span>
-      <form action="">
-        <table>
-          <tr>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Werewolf1">
-                <img src="img\werewolf.png"><br>
-                Werewolf
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Werewolf2">
-                <img src="img\werewolf.png"><br>
-                Werewolf
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Minion">
-                <img src="img\minion.png"><br>
-                Minion
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Tanner">
-                <img src="img\tanner.png"><br>
-                Tanner
-              </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Villager1">
-                <img src="img\villager.png"><br>
-                Villager
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Villager2">
-                <img src="img\villager.png"><br>
-                Villager
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Villager3">
-                <img src="img\villager.png"><br>
-                Villager
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Seer">
-                <img src="img\seer.png"><br>
-                Seer
-              </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Mason1">
-                <img src="img\mason.png"><br>
-                Mason Bro.
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Mason2">
-                <img src="img\mason.png"><br>
-                Mason Bro.
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Robber">
-                <img src="img\robber.png"><br>
-                Robber
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Troublemaker">
-                <img src="img\troublemaker.png"><br>
-                Troublemaker
-              </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Drunk">
-                <img src="img\drunk.png"><br>
-                Drunk
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Hunter">
-                <img src="img\hunter.png"><br>
-                Hunter
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Insomniac">
-                <img src="img\insomniac.png"><br>
-                Insomniac
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="checkbox" class="roleSelect" value="Doppelganger">
-                <img src="img\doppleganger.png"><br>
-                Derppelg&#228;nger
-              </label>
-            </td>
-          </tr>
-        </table>
-        <button id="readyBtn" disabled="disabled">Ready</button>
-        <button id="unreadyBtn">Unready</button>
-      </form>
-      <button id="startGame" disabled="disabled">Start Game</button>
-    </div>
+      <div id="join">
+        <form action="">
+          <input id="name" autocomplete="off" placeholder="First and Last Name" /><button>Send</button>
+        </form>
+      </div>
+      <div id="students">There are currently 0 students in the queue.</div>
+      <div id="mySpot">You are not currently in the queue.</div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="/js/main.js"></script>
-    <!-- Music/SFX -->
-    <audio src="/music/Closeeyes.mp3" id="mp3" preload="auto"></audio>
   </body>
 </html>
