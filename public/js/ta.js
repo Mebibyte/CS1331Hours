@@ -14,6 +14,7 @@ $('form', '#join').submit(function(){
 socket.on('success', function() {
   loggedIn = true;
   $('#join').hide();
+  $('#removeAllButton').show();
   socket.emit('update');
 });
 
