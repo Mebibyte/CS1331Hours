@@ -4,15 +4,37 @@
     <title>CS1331 Office Hours</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
   </head>
-  <body>
-    <div id="wrapper">
-      <div id="join">
-        <form action="">
-          <input id="name" autocomplete="off" placeholder="First and Last Name" /><button>Send</button>
-        </form>
+  <body style="padding-bottom: 70px">
+    <div class="container-fluid">
+      <div class="jumbotron text-center" style="padding: 0.5em 0.6em;">
+          <h1>CS 1331 Office Hours</h1>
+          <p>
+            Add yourself to the queue using the form. Keep this page open for updates.
+          </p>
       </div>
-      <div id="students">There are currently 0 students in the queue.</div>
-      <div id="mySpot">You are not currently in the queue.</div>
+      <div class="text-center jumbotron2">
+        <div id="tas">
+          There are currently 0 TAs on duty.
+        </div>
+        <div id="students">
+          There are currently 0 students in the queue.
+        </div>
+        <div id="mySpot">
+          You are not currently in the queue.
+        </div>
+      </div>
+      <div id="join" class="row center-block" style="padding-top: 30px;">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="text-center well">
+            <form action="" class="form">
+              <div class="form-group">
+                <input id="name" class="form-control" autocomplete="off" placeholder="First and Last Name" />
+              </div>
+              <button class="btn btn-default btn-lg">Enqueue Me!</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>

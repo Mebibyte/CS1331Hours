@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CS1331 Office Hours - TA View</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+   <body style="padding-bottom: 70px">
+    <div class="container-fluid">
+      <div class="jumbotron text-center" style="padding: 0.5em 0.6em;">
+        <h1>CS 1331 Office Hours</h1>
+        <p>
+          Add yourself to the queue using the form. You can remove yourself if you no longer need help.
+        </p>
+      </div>
+      <div class="text-center jumbotron2">
+        <div id="tas">
+          There are currently 0 TAs on duty.
+        </div>
+        <div id="students">
+          There are currently 0 students in the queue.
+        </div>
+      </div>
+      <div class="text-center">
+        <h2>Student Queue</h2>
+        <button class="btn btn-default btn-lg" onClick="removeAllStudents()">Remove All Students</button>
+        <div class="table-responsive col-md-6 col-md-offset-3">
+          <table id="studentList" class="table table-hover table-condensed text-center">
+          </table>
+        </div>
+      </div>
+      <div id="join" class="row center-block" style="padding-top: 30px;">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="text-center well">
+            <form action="" class="form">
+              <div class="form-group">
+                <input id="name" autocomplete="off" class="form-control" placeholder="TA Name" style="width: 48% !important;">
+                <input id="password" autocomplete="off" class="form-control" placeholder="Password" type="password" style="width: 48% !important;">
+              </div>
+              <button class="btn btn-default btn-lg">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/js/ta.js"></script>
+  </body>
+</html>

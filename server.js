@@ -5,68 +5,76 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 1337;
 var path = require('path');
 
-var host = '';
-var usernames = {};
+var usernames = [];
 var numUsers = 0;
+var numTAs = 0;
 
 // Index
 app.get('/', function(req, res){
   res.sendFile('index.html', {root: __dirname});
 });
-// Index
+// TA Page
 app.get('/TA', function(req, res){
-  res.sendFile('index.html', {root: __dirname});
+  res.sendFile('ta.html', {root: __dirname});
 });
 // Static Files
 app.use(express.static(path.join(__dirname, 'public')));
 
 io.on('connection', function(socket){
   var addedUser = false;
+  var addedTA = false;
   updatePlayers();
   socket.on('join queue', function(username){
     socket.username = username;
-    usernames[socket.username] = {
-      username: socket.username,
-      ready: false
-    };
+    usernames.push({username: username, helped: false});
     ++numUsers;
     addedUser = true;
     updatePlayers();
   });
 
+  socket.on('ta login', function(username, password) {
+    if (password == '107') {
+      socket.username = username;
+      numTAs++;
+      addedTA = true;
+      socket.emit('success');
+    }
+  });
+
+  socket.on('helping', function(index) {
+    usernames[index].helped = true;
+    updatePlayers();
+  });
+
+  socket.on('remove', function(index) {
+    usernames.splice(index, 1);
+    numUsers--;
+    updatePlayers();
+  });
+
+  socket.on('remove all', function() {
+    usernames = [];
+    numUsers = 0;
+    updatePlayers();
+  });
+
+  socket.on('update', function() {
+    updatePlayers();
+  });
+
   socket.on('disconnect', function() {
-    if (addedUser) {
-      if (usernames[socket.username].ready) {
-        for (var key in roles) {
-          roles[key] = 0;
-        }
-      }
-      delete usernames[socket.username];
-      if (host == socket.username) {
-        var keyArray = Object.keys(usernames);
-        var len = keyArray.length;
-        if (len == 0) {
-          host = '';
-        } else {
-          host = usernames[keyArray[Math.floor(Math.random() * len)]].username;
-        }
-      }
-      numUsers--;
+    if (addedTA) {
+      numTAs--;
       updatePlayers();
     }
   });
 });
 
 function updatePlayers() {
-  for (var key in usernames) {
-    if (usernames[key].username == undefined) {
-      delete usernames[key];
-    }
-  }
   io.emit('update players', {
     numUsers: numUsers,
     usernames: usernames,
-    host: host
+    numTAs: numTAs
   });
 };
 
