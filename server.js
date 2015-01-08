@@ -1,4 +1,4 @@
-var azure = require('azure-storage');
+//var azure = require('azure-storage');
 
 var express = require('express');
 var app = express();
