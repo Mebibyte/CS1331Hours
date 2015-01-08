@@ -1,3 +1,22 @@
+var azure = require('azure-storage');
+var blobSvc = azure.createBlobService();
+blobSvc.createContainerIfNotExists('mycontainer', function(error, result, response){
+  if(!error){
+    blobSvc.createBlockBlobFromText('mycontainer', 'myblob', 'test', function(error, result, response) {
+      if(!error){
+        console.log("Blob created from Text successfully.");
+      } else {
+        console.log("Error creating blob");
+      }
+    });
+  } else {
+    console.log("Error creatting container");
+  }
+});
+
+
+
+
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
