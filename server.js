@@ -35,7 +35,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('ta login', function(username, password) {
-    if (password == '107') {
+    if (password == process.env.TAPassword) {
       socket.username = username;
       numTAs++;
       addedTA = true;
