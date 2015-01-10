@@ -1,4 +1,4 @@
-var azure = require('azure-storage');
+//var azure = require('azure-storage');
 //var blobSvc = azure.createBlobService();
 
 var express = require('express');
