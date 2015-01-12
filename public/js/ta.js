@@ -19,10 +19,6 @@ socket.on('success', function() {
   socket.emit('update');
 });
 
-function assist(index) {
-  socket.emit('helping', index);
-}
-
 function removeStudent(index) {
   socket.emit('remove', index);
 }
@@ -45,13 +41,8 @@ socket.on('update players', function(msg) {
   if (loggedIn) {
     $('#studentList').empty();
     for (var i = 0; i < msg.usernames.length; i++) {
-      if (!msg.usernames[i].helped) {
-        $('#studentList').append("<tr><td>" + msg.usernames[i].username + 
-          "</td><td><button class='btn btn-default btn-lg' onclick='assist(" + i + ")'>Assist</button></td><td><button class='btn btn-default btn-lg' onclick='removeStudent(" + i + ")'>Remove</button></td></tr>");
-      } else {
-        $('#studentList').append("<tr><td>" + msg.usernames[i].username +
-          "</td><td>Being Helped</td><td><button class='btn btn-default btn-lg' onclick='removeStudent(" + i + ")'>Remove</button></td></tr>");      
-      }
+      $('#studentList').append("<tr><td>" + msg.usernames[i].username + 
+        "</td><td> + " msg.usernames[i].professor " + </td><td><button class='btn btn-default btn-lg' onclick='removeStudent(" + i + ")'>Remove</button></td></tr>");
     }
   }
 });

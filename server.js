@@ -16,7 +16,7 @@ blobSvc.createContainerIfNotExists('queue', function(error, result, response){
   if(!error){
     blobSvc.getBlobToText('queue', 'list', function(error, result, response){
       if(!error){
-        usernames = result.split(",");
+        usernames = JSON.parse(result);
         numUsers = usernames.length;
       }
     });
@@ -38,9 +38,9 @@ io.on('connection', function(socket){
   var addedUser = false;
   var addedTA = false;
   updatePlayers();
-  socket.on('join queue', function(username){
+  socket.on('join queue', function(username, prof){
     socket.username = username;
-    usernames.push({username: username, helped: false});
+    usernames.push({username: username, professor: prof});
     ++numUsers;
     addedUser = true;
     updatePlayers();
@@ -91,7 +91,7 @@ function updatePlayers() {
     numTAs: numTAs
   });
 
-  blobSvc.createBlockBlobFromText('queue', 'list', usernames.toString(), function(error, result, response){
+  blobSvc.createBlockBlobFromText('queue', 'list', JSON.stringify(usernames), function(error, result, response){
     if(!error){
     }
   });

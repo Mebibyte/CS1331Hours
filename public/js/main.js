@@ -4,8 +4,10 @@ var myName = '';
 
 $('form', '#join').submit(function(){
   myName = $('#name').val();
-  if (myName != '') {
-    socket.emit('join queue', myName);
+  prof = $('input[name=professor]:checked').val();
+  console.log(prof);
+  if (myName != '' && prof) {
+    socket.emit('join queue', myName, prof);
   }
   return false;
 });
