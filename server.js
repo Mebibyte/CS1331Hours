@@ -1,6 +1,3 @@
-var azure = require('azure-storage');
-var blobSvc = azure.createBlobService();
-
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -11,6 +8,19 @@ var path = require('path');
 var usernames = [];
 var numUsers = 0;
 var numTAs = 0;
+
+var azure = require('azure-storage');
+var blobSvc = azure.createBlobService();
+blobSvc.createContainerIfNotExists('queue', function(error, result, response){
+  if(!error){
+    blobSvc.getBlobToText('queue', 'list', function(error, result, response){
+      if(!error){
+        usernames = result.split(",");
+        numUsers = usernames.length;
+      }
+    });
+  }
+});
 
 // Index
 app.get('/', function(req, res){
@@ -78,6 +88,11 @@ function updatePlayers() {
     numUsers: numUsers,
     usernames: usernames,
     numTAs: numTAs
+  });
+  
+  blobSvc.createBlockBlobFromText('queue', 'list', usernames.toString(), function(error, result, response){
+    if(!error){
+    }
   });
 };
 
