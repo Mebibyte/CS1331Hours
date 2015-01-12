@@ -13,12 +13,6 @@ var azure = require('azure-storage');
 var blobSvc = azure.createBlobService();
 blobSvc.createContainerIfNotExists('queue', function(error, result, response){
   if(!error){
-    blobSvc.getBlobToText('queue', 'list', function(error, result, response){
-      if(!error){
-        usernames = result.split(",");
-        numUsers = usernames.length;
-      }
-    });
   }
 });
 
@@ -89,7 +83,7 @@ function updatePlayers() {
     usernames: usernames,
     numTAs: numTAs
   });
-  
+
   blobSvc.createBlockBlobFromText('queue', 'list', usernames.toString(), function(error, result, response){
     if(!error){
     }
