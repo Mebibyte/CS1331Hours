@@ -42,7 +42,7 @@ socket.on('update players', function(msg) {
     $('#studentList').empty();
     for (var i = 0; i < msg.usernames.length; i++) {
       $('#studentList').append("<tr><td>" + msg.usernames[i].username + 
-        "</td><td> + " msg.usernames[i].professor " + </td><td><button class='btn btn-default btn-lg' onclick='removeStudent(" + i + ")'>Remove</button></td></tr>");
+        "</td><td>" + msg.usernames[i].professor + "</td><td><button class='btn btn-default btn-lg' onclick='removeStudent(" + i + ")'>Remove</button></td></tr>");
     }
   }
 });
