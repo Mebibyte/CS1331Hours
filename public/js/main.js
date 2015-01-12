@@ -33,3 +33,7 @@ socket.on('update players', function(msg) {
     $('#join').hide();
   }
 });
+
+socket.on('debug', function(msg) {
+  console.log(msg);
+});

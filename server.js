@@ -9,11 +9,14 @@ var usernames = [];
 var numUsers = 0;
 var numTAs = 0;
 
+var debug = null;
+
 var azure = require('azure-storage');
 var blobSvc = azure.createBlobService();
 blobSvc.createContainerIfNotExists('queue', function(error, result, response){
   if(!error){
   }
+  debug = error;
 });
 
 // Index
@@ -83,10 +86,12 @@ function updatePlayers() {
     usernames: usernames,
     numTAs: numTAs
   });
+  io.emit('debug', debug);
 
   blobSvc.createBlockBlobFromText('queue', 'list', usernames.toString(), function(error, result, response){
     if(!error){
     }
+    io.emit(debug, error);
   });
 };
 
