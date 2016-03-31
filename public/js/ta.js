@@ -24,7 +24,9 @@ function removeStudent(index) {
 }
 
 function removeAllStudents() {
-  socket.emit('remove all');
+  if (confirm("Are you sure? Press OK")) {
+    socket.emit('remove all');
+  }
 }
 
 $(document).ready(function() {
