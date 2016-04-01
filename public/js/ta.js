@@ -56,7 +56,9 @@ $(document).ready(function() {
 socket.on('update players', function(msg) {
   if (loggedIn) {
     $('#helpChrisStudent').prop("disabled", true);
+    $('#helpChrisStudent').text("No Students");
     $('#helpJohnStudent').prop("disabled", true);
+    $('#helpJohnStudent').text("No Students");
     johnStudents = [];
     chrisStudents = [];
     $('#users').text('');
@@ -71,9 +73,11 @@ socket.on('update players', function(msg) {
       if (msg.usernames[i].professor == "chris") {
         chrisStudents.push([msg.usernames[i].username, i]);
         $('#helpChrisStudent').prop("disabled", false);
+        $('#helpJohnStudent').text("Help a Student");
       } else if (msg.usernames[i].professor == "john") {
         johnStudents.push([msg.usernames[i].username, i]);
         $('#helpJohnStudent').prop("disabled", false);
+        $('#helpJohnStudent').text("Help a Student");
       }
     }
 
