@@ -1,5 +1,7 @@
 var socket = io();
 var loggedIn = false;
+var chrisStudents = [];
+var johnStudents = [];
 
 $('form', '#join').submit(function(){
   var taName = $('#name').val();
@@ -8,16 +10,31 @@ $('form', '#join').submit(function(){
   if (pass != null && taName != null) {
     socket.emit('ta login', taName, pass);
   }
-  return false;
 });
 
 socket.on('success', function() {
   loggedIn = true;
   setCookie("loggedIn", true, 1);
   $('#join').hide();
-  $('#removeAllButton').show();
+  $('#helpAStudent').show();
   socket.emit('update');
 });
+
+function helpChrisStudent() {
+  if (chrisStudents.length > 0) {
+    var student = chrisStudents.shift();
+    $('#currentlyHelping').text('You are currently helping: ' + student[0]);
+    socket.emit('remove', student[1]);
+  }
+}
+
+function helpJohnStudent() {
+  if (johnStudents.length > 0) {
+    var student = johnStudents.shift();
+    $('#currentlyHelping').text('You are currently helping: ' + student[0]);
+    socket.emit('remove', student[1]);
+  }
+}
 
 function removeStudent(index) {
   socket.emit('remove', index);
@@ -37,14 +54,33 @@ $(document).ready(function() {
 });
 
 socket.on('update players', function(msg) {
-  $('#users').text('');
-  $('#tas').text('There ' + (msg.numTAs == 1 ? 'is' : 'are') + ' currently ' + msg.numTAs + ' TA' + (msg.numTAs == 1 ? '' : 's') + ' on duty.')
-  $('#students').text('There ' + (msg.numUsers == 1 ? 'is' : 'are') + ' currently ' + msg.numUsers + ' student' + (msg.numUsers == 1 ? '' : 's') + ' in the queue.')
   if (loggedIn) {
+    $('#helpChrisStudent').prop("disabled", true);
+    $('#helpJohnStudent').prop("disabled", true);
+    johnStudents = [];
+    chrisStudents = [];
+    $('#users').text('');
+    $('#tas').text('There ' + (msg.numTAs == 1 ? 'is' : 'are') + ' currently ' + msg.numTAs + ' TA' + (msg.numTAs == 1 ? '' : 's') + ' on duty.')
+    $('#students').text('There ' + (msg.numUsers == 1 ? 'is' : 'are') + ' currently ' + msg.numUsers + ' student' + (msg.numUsers == 1 ? '' : 's') + ' in the queue.')
+
     $('#studentList').empty();
+
     for (var i = 0; i < msg.usernames.length; i++) {
       $('#studentList').append("<tr><td>" + msg.usernames[i].username + 
         "</td><td>" + msg.usernames[i].professor + "</td><td><button class='btn btn-default btn-lg' onclick='removeStudent(" + i + ")'>Remove</button></td></tr>");
+      if (msg.usernames[i].professor == "chris") {
+        chrisStudents.push([msg.usernames[i].username, i]);
+        $('#helpChrisStudent').prop("disabled", false);
+      } else if (msg.usernames[i].professor == "john") {
+        johnStudents.push([msg.usernames[i].username, i]);
+        $('#helpJohnStudent').prop("disabled", false);
+      }
+    }
+
+    if (msg.usernames.length > 0) {
+      $('#removeAllButton').prop("disabled", false);
+    } else {
+      $('#removeAllButton').prop("disabled", true);
     }
   }
 });

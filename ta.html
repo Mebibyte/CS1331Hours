@@ -1,32 +1,43 @@
 <!doctype html>
 <html>
   <head>
-    <title>CS1331 Office Hours - TA View</title>
+    <title>CS1331 Office Hours - TAs</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
   </head>
    <body style="padding-bottom: 70px">
     <div class="container-fluid">
       <div class="jumbotron text-center" style="padding: 0.5em 0.6em;">
-        <h1>CS 1331 Office Hours</h1>
+        <h1>CS 1331 Office Hours - TAs</h1>
         <p>
-          Add yourself to the queue using the form. You can remove yourself if you no longer need help.
+          Login using the form. Then click the 'Help a Student' button.
         </p>
       </div>
-      <div class="text-center jumbotron2">
-        <div id="tas">
-          There are currently 0 TAs on duty.
+      <div id="helpAStudent" class="text-center" style="display: none;">
+          <div class="text-center jumbotron2">
+            <div id="tas">
+              There are currently 0 TAs on duty.
+            </div>
+            <div id="students">
+              There are currently 0 students in the queue.
+            </div>
+          </div>
+        <div style="display: inline-block; padding-top: 25px;" class="jumbotron2">
+            <div style="float: left; padding-right: 30px;">
+                <h2>Chris</h2>
+                <button id="helpChrisStudent" class="btn btn-default btn-lg" onclick="helpChrisStudent()" disabled>Help a Student</button>
+            </div>
+            <div style="float: left;">
+                <h2>John</h2>
+                <button id="helpJohnStudent" class="btn btn-default btn-lg" onclick="helpJohnStudent()" disabled>Help a Student</button>
+            </div>
         </div>
-        <div id="students">
-          There are currently 0 students in the queue.
-        </div>
-      </div>
-      <div class="text-center">
-        <h2>Student Queue</h2>
-        <button id="removeAllButton" class="btn btn-default btn-lg" style="display: none;" onClick="removeAllStudents()">Remove All Students</button>
+        <div id="currentlyHelping" style="clear: both; padding-top: 10px;" class="jumbotron2">You are currently helping: Nobody, slacker!</div>
+        <h2 style="padding-top: 25px;">Student Queue</h2>
         <div class="table-responsive col-md-6 col-md-offset-3">
           <table id="studentList" class="table table-hover table-condensed text-center">
           </table>
         </div>
+        <button id="removeAllButton" class="btn btn-default btn-lg" onClick="removeAllStudents()" disabled>Remove All Students</button>
       </div>
       <div id="join" class="row center-block" style="padding-top: 30px;">
         <div class="col-md-6 col-md-offset-3">
