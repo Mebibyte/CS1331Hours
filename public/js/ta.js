@@ -67,6 +67,8 @@ socket.on('update players', function(msg) {
 
     $('#studentList').empty();
 
+	$('#studentList').append("<tr class='jumbotron2'><td>Name</td><td>Professor</td><td>Manual Removal</td></tr>");
+
     for (var i = 0; i < msg.usernames.length; i++) {
       $('#studentList').append("<tr><td>" + msg.usernames[i].username + 
         "</td><td>" + msg.usernames[i].professor + "</td><td><button class='btn btn-default btn-lg' onclick='removeStudent(" + i + ")'>Remove</button></td></tr>");
