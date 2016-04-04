@@ -73,7 +73,7 @@ socket.on('update players', function(msg) {
       if (msg.usernames[i].professor == "chris") {
         chrisStudents.push([msg.usernames[i].username, i]);
         $('#helpChrisStudent').prop("disabled", false);
-        $('#helpJohnStudent').text("Help a Student");
+        $('#helpChrisStudent').text("Help a Student");
       } else if (msg.usernames[i].professor == "john") {
         johnStudents.push([msg.usernames[i].username, i]);
         $('#helpJohnStudent').prop("disabled", false);
